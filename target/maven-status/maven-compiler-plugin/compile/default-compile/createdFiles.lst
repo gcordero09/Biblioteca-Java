@@ -1,0 +1,17 @@
+tech\calaverita\models\Usuario.class
+tech\calaverita\models\LibroAutor.class
+tech\calaverita\models\Prestamo.class
+tech\calaverita\views\Libros.class
+tech\calaverita\models\Autor.class
+tech\calaverita\views\Autores$1.class
+tech\calaverita\views\Libros$1.class
+tech\calaverita\models\Libro.class
+tech\calaverita\views\Prestamos$1.class
+tech\calaverita\views\LibrosAutores.class
+tech\calaverita\views\Usuarios.class
+tech\calaverita\views\Prestamos.class
+tech\calaverita\views\Usuarios$1.class
+tech\calaverita\mvc\MvcDemo.class
+tech\calaverita\bd\bd.class
+tech\calaverita\views\LibrosAutores$1.class
+tech\calaverita\views\Autores.class
