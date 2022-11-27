@@ -4,7 +4,12 @@
  */
 package tech.calaverita.views;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
+import tech.calaverita.controller.Controller;
+import tech.calaverita.idao.UsuarioDaoJdbc;
 
 /**
  *
@@ -15,17 +20,24 @@ public class Usuarios extends javax.swing.JPanel {
     /**
      * Creates new form Autores
      */
-    Biblioteca p0;
-    
-    public Usuarios(Biblioteca bibliteca) {
+    Controller controller;
+    UsuarioDaoJdbc usuario;
+
+    public Usuarios(Controller controller) {
         initComponents();
-        this.p0 = bibliteca;
+        this.controller = controller;
+        this.usuario = new UsuarioDaoJdbc();
+        try {
+            usuario.seleccionar(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(Autores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public JTable getTable(){
+    public JTable getTable() {
         return this.jTable1;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,11 +63,6 @@ public class Usuarios extends javax.swing.JPanel {
         jTextField1.setForeground(new java.awt.Color(204, 204, 204));
         jTextField1.setText("Ingrese el nombre o id del usuario a buscar");
         jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 102, 255));
@@ -94,6 +101,11 @@ public class Usuarios extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Agregar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, -1));
 
         jButton4.setBackground(new java.awt.Color(51, 102, 255));
@@ -109,9 +121,12 @@ public class Usuarios extends javax.swing.JPanel {
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        RegistrarUsuario vista = new RegistrarUsuario();
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Registrar Usuario");
+    }//GEN-LAST:event_jButton2MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

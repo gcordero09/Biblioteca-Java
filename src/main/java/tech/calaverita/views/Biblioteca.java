@@ -8,8 +8,10 @@ import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import tech.calaverita.bd.Conexion;
+import tech.calaverita.controller.Controller;
 
 /**
  *
@@ -20,18 +22,16 @@ public class Biblioteca extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    Controller controller;
+
     public Biblioteca() {
         initComponents();
 
-        Principal p0 = new Principal();
-        p0.setSize(600, 400);
-        p0.setLocation(0, 0);
+        controller = new Controller(this);
 
-        this.Contenido.removeAll();
-        this.Contenido.add(p0, BorderLayout.CENTER);
-        this.Contenido.revalidate();
-        this.Contenido.repaint();
-        
+        Principal vista = new Principal();
+        controller.setVista(vista);
+
         try {
             Conexion.getConnection();
         } catch (SQLException ex) {
@@ -39,19 +39,12 @@ public class Biblioteca extends javax.swing.JFrame {
         }
     }
 
-    public void setContenido(JPanel p1) {
-
-        p1.setSize(600, 400);
-        p1.setLocation(0, 0);
-
-        this.Contenido.removeAll();
-        this.Contenido.add(p1, BorderLayout.CENTER);
-        this.Contenido.revalidate();
-        this.Contenido.repaint();
+    public JPanel getContenido() {
+        return this.Contenido;
     }
-    
-    public void setCabecera(String cabecera){
-        this.Cabecera.setText(cabecera);
+
+    public JLabel getCabecera() {
+        return Cabecera;
     }
 
     /**
@@ -227,37 +220,32 @@ public class Biblioteca extends javax.swing.JFrame {
 
     private void PrincipalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrincipalMousePressed
         // TODO add your handling code here:
-        Principal p1 = new Principal();
-        this.setContenido(p1);
-        this.setCabecera("Principal");
+        Principal vista = new Principal();
+        this.controller.setVista(vista);
     }//GEN-LAST:event_PrincipalMousePressed
 
     private void UsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMousePressed
         // TODO add your handling code here:
-        Usuarios p1 = new Usuarios(this);
-        this.setContenido(p1);
-        this.setCabecera("Usuarios");
+        Usuarios vista = new Usuarios(controller);
+        this.controller.setVista(vista);
     }//GEN-LAST:event_UsuariosMousePressed
 
     private void LibrosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LibrosMousePressed
         // TODO add your handling code here:
-        Libros p1 = new Libros(this);
-        this.setContenido(p1);
-        this.setCabecera("Libros");
+        Libros vista = new Libros(controller);
+        this.controller.setVista(vista);
     }//GEN-LAST:event_LibrosMousePressed
 
     private void AutoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AutoresMousePressed
         // TODO add your handling code here:
-        Autores p1 = new Autores(this);
-        this.setContenido(p1);
-        this.setCabecera("Autores");
+        Autores vista = new Autores(controller);
+        this.controller.setVista(vista);
     }//GEN-LAST:event_AutoresMousePressed
 
     private void PrestamosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrestamosMousePressed
         // TODO add your handling code here:
-        Prestamos p1 = new Prestamos(this);
-        this.setContenido(p1);
-        this.setCabecera("Prestamos");
+        Prestamos vista = new Prestamos(controller);
+        this.controller.setVista(vista);
     }//GEN-LAST:event_PrestamosMousePressed
 
     /**

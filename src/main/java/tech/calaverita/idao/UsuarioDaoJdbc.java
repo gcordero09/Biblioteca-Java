@@ -35,14 +35,17 @@ public class UsuarioDaoJdbc implements IUsuarioDao {
         while (re.next()) {
             list[i][0] = re.getString("id");
             list[i][1] = re.getString("nombre");
-            list[i][2] = re.getString("nacionalidad");
+            list[i][2] = re.getString("programa");
+            list[i][3] = re.getString("fecha_nacimiento");
+            list[i][4] = re.getString("correo");
+            list[i][5] = re.getString("password");
             i++;
         }
 
         usuarios.getTable().setModel(new javax.swing.table.DefaultTableModel(
                 list,
                 new String[]{
-                    "Id", "Nombre", "Nacionalidad"
+                    "Id", "Nombre", "Programa", "Fecha de Nacimiento", "Correo", "Password"
                 }));
     }
     

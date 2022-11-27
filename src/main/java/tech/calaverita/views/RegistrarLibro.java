@@ -20,12 +20,12 @@ public class RegistrarLibro extends javax.swing.JPanel {
     /**
      * Creates new form AddUsuario
      */
-    LibroDaoJdbc libroDaoJdbc = new LibroDaoJdbc();
+    LibroDaoJdbc libroDaoJdbc;
     Libro libro;
-    
+
     public RegistrarLibro() {
         initComponents();
-        
+        libroDaoJdbc = new LibroDaoJdbc();
         Subida.setVisible(false);
     }
 
@@ -166,7 +166,7 @@ public class RegistrarLibro extends javax.swing.JPanel {
             String coverUrl = this.coverUrl.getText();
             String digitalUrl = this.digitalUrl.getText();
             Boolean disponibleFisico = Boolean.parseBoolean(this.disponibleFisico.getText());
-            
+
             libro = new Libro(titulo, editorial, area, coverUrl, digitalUrl, disponibleFisico);
             libroDaoJdbc.insertar(libro);
             Subida.setVisible(true);

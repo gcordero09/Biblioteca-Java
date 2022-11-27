@@ -5,8 +5,13 @@
 package tech.calaverita.views;
 
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import tech.calaverita.controller.Controller;
+import tech.calaverita.idao.PrestamoDaoJdbc;
 
 /**
  *
@@ -17,14 +22,21 @@ public class Prestamos extends javax.swing.JPanel {
     /**
      * Creates new form Autores
      */
-    Biblioteca p0;
+    Controller controller;
+    PrestamoDaoJdbc prestamo;
 
-    public Prestamos(Biblioteca biblioteca) {
+    public Prestamos(Controller controller) {
         initComponents();
-        this.p0 = biblioteca;
+        this.controller = controller;
+        this.prestamo = new PrestamoDaoJdbc();
+        try {
+            prestamo.seleccionar(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(Autores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    public JTable getTable(){
+
+    public JTable getTable() {
         return this.jTable1;
     }
 
@@ -113,10 +125,10 @@ public class Prestamos extends javax.swing.JPanel {
 
     private void RegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMousePressed
         // TODO add your handling code here:
-        RegistrarPrestamo p1 = new RegistrarPrestamo();
-        this.p0.setContenido(p1);
+        RegistrarPrestamo vista = new RegistrarPrestamo();
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Registrar Prestamo");
     }//GEN-LAST:event_RegistrarMousePressed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;

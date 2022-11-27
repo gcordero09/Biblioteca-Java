@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
+import tech.calaverita.controller.Controller;
 import tech.calaverita.idao.LibroDaoJdbc;
 
 /**
@@ -20,12 +21,12 @@ public class Libros extends javax.swing.JPanel {
      * Creates new form Libros
      */
     
-    Biblioteca p0;
+    Controller controller;
     LibroDaoJdbc libro = new LibroDaoJdbc();
     
-    public Libros(Biblioteca biblioteca) {
+    public Libros(Controller controller) {
         initComponents();
-        this.p0 = biblioteca;
+        this.controller = controller;
         try {
             libro.seleccionar(this);
         } catch (SQLException ex) {
@@ -150,9 +151,9 @@ public class Libros extends javax.swing.JPanel {
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-        RegistrarLibro registrarLibro = new RegistrarLibro();
-        this.p0.setContenido(registrarLibro);
-        this.p0.setCabecera("Registrar Libro");
+        RegistrarLibro vista = new RegistrarLibro();
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Registrar Libro");
     }//GEN-LAST:event_jButton1MousePressed
 
 

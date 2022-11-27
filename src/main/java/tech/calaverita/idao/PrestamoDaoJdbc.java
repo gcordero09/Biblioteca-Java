@@ -17,7 +17,7 @@ public class PrestamoDaoJdbc implements IPrestamoDao {
     private Connection conexionTransaccional;
 
     private static final String SQL_SELECT = "SELECT * FROM prestamos";
-    private static final String SQL_INSERT = "INSERT INTO prestamos(fecha_prestamo, fecha_devolucion, devuelto, usuario_id, libro_id) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO prestamos(fecha_prestamo, usuario_id, libro_id) VALUES (curdate(), ?, ?)";
     private static final String SQL_UPDATE = "UPDATE prestamos SET fecha_prestamo = ?, fecha_devolucion = ?, devuelto = ?, usuario_id = ?, libro_id = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM prestamos WHERE id = ?";
 
@@ -37,15 +37,18 @@ public class PrestamoDaoJdbc implements IPrestamoDao {
         ResultSet re = stmt.executeQuery();
         while (re.next()) {
             list[i][0] = re.getString("id");
-            list[i][1] = re.getString("nombre");
-            list[i][2] = re.getString("nacionalidad");
+            list[i][1] = re.getString("fecha_prestamo");
+            list[i][2] = re.getString("fecha_devolucion");
+            list[i][3] = re.getString("devuelto");
+            list[i][4] = re.getString("usuario_id");
+            list[i][5] = re.getString("libro_id");
             i++;
         }
 
         prestamos.getTable().setModel(new javax.swing.table.DefaultTableModel(
                 list,
                 new String[]{
-                    "Id", "Nombre", "Nacionalidad"
+                    "Id", "Fecha de Prestamo", "Fecha de Devolución", "Devuelto", "Id de Usuario", "Id de Libro"
                 }));
     }
     
@@ -91,11 +94,11 @@ public class PrestamoDaoJdbc implements IPrestamoDao {
         try {
             conn = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, prestamo.getFechaPrestamo());
-            stmt.setString(2, prestamo.getFechaDevolucion());
-            stmt.setBoolean(3, prestamo.isIsDevuelto());
-            stmt.setInt(4, prestamo.getUsuarioId());
-            stmt.setInt(5, prestamo.getLibroId());
+//            stmt.setString(1, prestamo.getFechaPrestamo());
+//            stmt.setString(1, prestamo.getFechaDevolucion());
+//            stmt.setBoolean(2, prestamo.isIsDevuelto());
+            stmt.setInt(1, prestamo.getUsuarioId());
+            stmt.setInt(2, prestamo.getLibroId());
             registros = stmt.executeUpdate();
         } finally {
             Conexion.close(stmt);
