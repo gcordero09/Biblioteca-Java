@@ -15,4 +15,8 @@ public interface IPrestamoDao {
     public int eliminar(Prestamo prestamo) throws SQLException;
 
     public int actualizar(Prestamo prestamo) throws SQLException;
+    
+    public void buscar(String valor, Prestamos prestamos) throws SQLException;
+    
+    public int devolver(Prestamo prestamo) throws SQLException;
 }

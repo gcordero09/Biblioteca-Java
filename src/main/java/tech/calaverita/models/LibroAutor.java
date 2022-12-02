@@ -6,6 +6,14 @@ public class LibroAutor {
     private String libroId;
     private String autorId;
 
+    public LibroAutor(){
+        
+    }
+    
+    public LibroAutor(int id){
+        this.id = id;
+    }
+    
     public LibroAutor(String libroId, String autorId) {
         this.libroId = libroId;
         this.autorId = autorId;

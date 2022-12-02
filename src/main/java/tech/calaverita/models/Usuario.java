@@ -9,6 +9,14 @@ public class Usuario {
     private String correo;
     private String password;
 
+    public Usuario(){
+        
+    }
+    
+    public Usuario(int id){
+        this.id = id;
+    }
+    
     public Usuario(String nombre, String programa, String fechaNacimiento, String correo, String password) {
         this.nombre = nombre;
         this.programa = programa;

@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import tech.calaverita.bd.Conexion;
 import tech.calaverita.controller.Controller;
 
@@ -73,6 +75,8 @@ public class Biblioteca extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Principal = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        Prestamos1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         Contenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,6 +191,22 @@ public class Biblioteca extends javax.swing.JFrame {
 
         Menu.add(Principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 40));
 
+        Prestamos1.setBackground(new java.awt.Color(51, 102, 255));
+        Prestamos1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Prestamos1MousePressed(evt);
+            }
+        });
+        Prestamos1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar-multiple-check.png"))); // NOI18N
+        jLabel8.setText(" Devolución");
+        Prestamos1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 40));
+
+        Menu.add(Prestamos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 190, 40));
+
         Background.add(Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 500));
 
         Contenido.setBackground(new java.awt.Color(255, 255, 255));
@@ -220,33 +240,89 @@ public class Biblioteca extends javax.swing.JFrame {
 
     private void PrincipalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrincipalMousePressed
         // TODO add your handling code here:
-        Principal vista = new Principal();
-        this.controller.setVista(vista);
+        final SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Principal vista = new Principal();
+                controller.setVista(vista);
+                controller.setCabecera("Principal");
+                return null;
+            }
+        };
+        worker.execute();
     }//GEN-LAST:event_PrincipalMousePressed
 
     private void UsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsuariosMousePressed
         // TODO add your handling code here:
-        Usuarios vista = new Usuarios(controller);
-        this.controller.setVista(vista);
+        final SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Usuarios vista = new Usuarios(controller);
+                controller.setVista(vista);
+                controller.setCabecera("Usuarios");
+                return null;
+            }
+        };
+        worker.execute();
+
     }//GEN-LAST:event_UsuariosMousePressed
 
     private void LibrosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LibrosMousePressed
         // TODO add your handling code here:
-        Libros vista = new Libros(controller);
-        this.controller.setVista(vista);
+        final SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Libros vista = new Libros(controller);
+                controller.setVista(vista);
+                controller.setCabecera("Libros");
+                return null;
+            }
+        };
+        worker.execute();
     }//GEN-LAST:event_LibrosMousePressed
 
     private void AutoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AutoresMousePressed
         // TODO add your handling code here:
-        Autores vista = new Autores(controller);
-        this.controller.setVista(vista);
+        final SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Autores vista = new Autores(controller);
+                controller.setVista(vista);
+                controller.setCabecera("Autores");
+                return null;
+            }
+        };
+        worker.execute();
     }//GEN-LAST:event_AutoresMousePressed
 
     private void PrestamosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrestamosMousePressed
         // TODO add your handling code here:
-        Prestamos vista = new Prestamos(controller);
-        this.controller.setVista(vista);
+        final SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Prestamos vista = new Prestamos(controller);
+                controller.setVista(vista);
+                controller.setCabecera("Prestamos");
+                return null;
+            }
+        };
+        worker.execute();
     }//GEN-LAST:event_PrestamosMousePressed
+
+    private void Prestamos1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Prestamos1MousePressed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        final SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Devolucion vista = new Devolucion();
+                controller.setVista(vista);
+                controller.setCabecera("Prestamos");
+                return null;
+            }
+        };
+        worker.execute();
+    }//GEN-LAST:event_Prestamos1MousePressed
 
     /**
      * @param args the command line arguments
@@ -279,10 +355,9 @@ public class Biblioteca extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new Biblioteca().setVisible(true);
-
             }
         });
     }
@@ -296,6 +371,7 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JPanel Libros;
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel Prestamos;
+    private javax.swing.JPanel Prestamos1;
     private javax.swing.JPanel Principal;
     private javax.swing.JPanel Usuarios;
     private javax.swing.JLabel jLabel1;
@@ -305,6 +381,7 @@ public class Biblioteca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

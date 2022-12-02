@@ -9,6 +9,14 @@ public class Libro {
     private String coverUrl;
     private String digitalUrl;
     private boolean isDisponibleFisico;
+    
+    public Libro(){
+        
+    }
+    
+    public Libro(int id){
+        this.id = id;
+    }
 
     public Libro(String titulo, String editorial, String area, String coverUrl, String digitalUrl, boolean isDisponibleFisico) {
         this.titulo = titulo;

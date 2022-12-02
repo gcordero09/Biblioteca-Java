@@ -8,7 +8,20 @@ public class Prestamo {
     private boolean isDevuelto;
     private int usuarioId;
     private int libroId;
-
+    
+    public Prestamo(){
+        
+    }
+    
+    public Prestamo(int id){
+        this.id = id;
+    }
+    
+    public Prestamo(int usuarioId, int libroId){
+        this.usuarioId = usuarioId;
+        this.libroId = libroId;
+    }
+    
     public Prestamo(String fechaPrestamo, String fechaDevolucion, boolean isDevuelto, int usuarioId, int libroId) {
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;

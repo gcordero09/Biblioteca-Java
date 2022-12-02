@@ -15,4 +15,6 @@ public interface IAutorDao {
     public int eliminar(Autor autor) throws SQLException;
 
     public int actualizar(Autor autor) throws SQLException;
+    
+    public void buscar(String valor, Autores autores) throws SQLException;
 }

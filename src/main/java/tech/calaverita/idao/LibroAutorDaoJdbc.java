@@ -20,6 +20,7 @@ public class LibroAutorDaoJdbc implements ILibroAutorDao {
     private static final String SQL_INSERT = "INSERT INTO libros_autores(libro_id, autor_id) VALUES (?, ?)";
     private static final String SQL_UPDATE = "UPDATE libros_autores SET libro_id = ?, autor_id = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM libros_autores WHERE id = ?";
+    private static final String SQL_SEARCH = "SELECT * FROM libros_autores WHERE id = ? OR libro_id = ? OR auto_id = ?";
 
 //    @Override
 //    public void seleccionar(Autores autores) throws SQLException {
@@ -138,5 +139,10 @@ public class LibroAutorDaoJdbc implements ILibroAutorDao {
             }
         }
         return registros;
+    }
+
+    @Override
+    public void buscar(String valor, LibroAutor librosAutores) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

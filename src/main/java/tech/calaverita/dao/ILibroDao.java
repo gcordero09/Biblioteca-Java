@@ -15,4 +15,6 @@ public interface ILibroDao {
     public int eliminar(Libro libro) throws SQLException;
 
     public int actualizar(Libro libro) throws SQLException;
+    
+    public void buscar(String valor, Libros libros) throws SQLException;
 }

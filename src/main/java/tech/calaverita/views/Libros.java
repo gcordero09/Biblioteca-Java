@@ -20,21 +20,21 @@ public class Libros extends javax.swing.JPanel {
     /**
      * Creates new form Libros
      */
-    
     Controller controller;
-    LibroDaoJdbc libro = new LibroDaoJdbc();
-    
+    LibroDaoJdbc libro;
+
     public Libros(Controller controller) {
         initComponents();
         this.controller = controller;
+        libro = new LibroDaoJdbc();
         try {
             libro.seleccionar(this);
         } catch (SQLException ex) {
             Logger.getLogger(Autores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public JTable getTable(){
+
+    public JTable getTable() {
         return this.jTable1;
     }
 
@@ -47,7 +47,7 @@ public class Libros extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        Valor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -59,17 +59,12 @@ public class Libros extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingrese el nombre o id del libro a buscar");
-        jTextField1.setBorder(null);
-        jTextField1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 438, -1));
+        Valor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Valor.setForeground(new java.awt.Color(204, 204, 204));
+        Valor.setText("Ingrese el nombre o id del libro a buscar");
+        Valor.setBorder(null);
+        Valor.setCaretColor(new java.awt.Color(255, 255, 255));
+        add(Valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 438, -1));
 
         jButton1.setBackground(new java.awt.Color(51, 102, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
@@ -112,9 +107,9 @@ public class Libros extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
             }
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
@@ -123,9 +118,9 @@ public class Libros extends javax.swing.JPanel {
         jButton3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Modificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton3MousePressed(evt);
             }
         });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
@@ -133,21 +128,14 @@ public class Libros extends javax.swing.JPanel {
         jButton4.setBackground(new java.awt.Color(51, 102, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Borrar");
+        jButton4.setText("Eliminar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton4MousePressed(evt);
+            }
+        });
         add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
@@ -156,8 +144,33 @@ public class Libros extends javax.swing.JPanel {
         this.controller.setCabecera("Registrar Libro");
     }//GEN-LAST:event_jButton1MousePressed
 
+    private void jButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MousePressed
+        // TODO add your handling code here:
+        EliminarRegistro vista = new EliminarRegistro("libro");
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Eliminar Libro");
+    }//GEN-LAST:event_jButton4MousePressed
+
+    private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
+        // TODO add your handling code here:
+        ModificarLibro vista = new ModificarLibro();
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Modificar Libro");
+    }//GEN-LAST:event_jButton3MousePressed
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        // TODO add your handling code here:
+        var valor = this.Valor.getText().toString();
+        try {
+            libro.buscar(valor, this);
+        } catch (SQLException ex) {
+            Logger.getLogger(Autores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Valor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -165,6 +178,5 @@ public class Libros extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

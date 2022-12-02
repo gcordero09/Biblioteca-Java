@@ -47,7 +47,7 @@ public class Usuarios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        Valor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -59,11 +59,11 @@ public class Usuarios extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingrese el nombre o id del usuario a buscar");
-        jTextField1.setBorder(null);
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        Valor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Valor.setForeground(new java.awt.Color(204, 204, 204));
+        Valor.setText("Ingrese el nombre o id del usuario a buscar");
+        Valor.setBorder(null);
+        add(Valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 102, 255));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 460, 10));
@@ -72,6 +72,11 @@ public class Usuarios extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Buscar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -112,12 +117,22 @@ public class Usuarios extends javax.swing.JPanel {
         jButton4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Borrar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton4MousePressed(evt);
+            }
+        });
         add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
 
         jButton3.setBackground(new java.awt.Color(51, 102, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Modificar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton3MousePressed(evt);
+            }
+        });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,8 +143,33 @@ public class Usuarios extends javax.swing.JPanel {
         this.controller.setCabecera("Registrar Usuario");
     }//GEN-LAST:event_jButton2MousePressed
 
+    private void jButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MousePressed
+        // TODO add your handling code here:
+        EliminarRegistro vista = new EliminarRegistro("usuario");
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Eliminar Usuario");
+    }//GEN-LAST:event_jButton4MousePressed
+
+    private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
+        // TODO add your handling code here:
+        ModificarUsuario vista = new ModificarUsuario();
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Modiciar Usuario");
+    }//GEN-LAST:event_jButton3MousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        // TODO add your handling code here:
+        var valor = this.Valor.getText().toString();
+        try {
+            usuario.buscar(valor, this);
+        } catch (SQLException ex) {
+            Logger.getLogger(Autores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Valor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -137,6 +177,5 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

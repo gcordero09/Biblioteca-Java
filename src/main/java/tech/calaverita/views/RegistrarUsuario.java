@@ -56,59 +56,76 @@ public class RegistrarUsuario extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Subida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Subida.setText("¡Se ha subido el usuario con éxito!");
+        add(Subida, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 20, -1, -1));
 
         correo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         correo.setForeground(new java.awt.Color(204, 204, 204));
         correo.setText("Ingrese el correo del usuario");
         correo.setBorder(null);
+        add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 270, -1));
 
         programa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         programa.setForeground(new java.awt.Color(204, 204, 204));
         programa.setText("Ingrese el programa");
         programa.setBorder(null);
+        add(programa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 270, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel3.setText("Programa");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         nombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(204, 204, 204));
         nombre.setText("Ingrese el nombre del usuario");
         nombre.setBorder(null);
+        add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 270, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel4.setText("Correo");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 90, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel5.setText("Nombre");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         fechaDeNacimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         fechaDeNacimiento.setForeground(new java.awt.Color(204, 204, 204));
         fechaDeNacimiento.setText("Ingrese la fecha de nacimiento");
         fechaDeNacimiento.setBorder(null);
+        add(fechaDeNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 270, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel6.setText("Password");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 90, -1));
 
         password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         password.setForeground(new java.awt.Color(204, 204, 204));
         password.setText("Ingrese la contraseña del usuario");
         password.setBorder(null);
+        add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 270, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel7.setText("Fecha de nacimiento");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 102, 255));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 270, 20));
 
         jSeparator2.setForeground(new java.awt.Color(51, 102, 255));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 270, 20));
 
         jSeparator3.setForeground(new java.awt.Color(51, 102, 255));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 270, 20));
 
         jSeparator4.setForeground(new java.awt.Color(51, 102, 255));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 270, 20));
 
         jSeparator6.setForeground(new java.awt.Color(51, 102, 255));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 270, 20));
 
         jButton1.setBackground(new java.awt.Color(51, 102, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
@@ -119,91 +136,7 @@ public class RegistrarUsuario extends javax.swing.JPanel {
                 jButton1MousePressed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(196, Short.MAX_VALUE)
-                .addComponent(Subida)
-                .addGap(170, 170, 170))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(235, 235, 235)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(224, 224, 224)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(programa, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel7)
-                        .addComponent(fechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(220, 220, 220)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(Subida)
-                .addContainerGap(360, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 70, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4))
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel6))
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(programa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7)
-                    .addGap(10, 10, 10)
-                    .addComponent(fechaDeNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 10, Short.MAX_VALUE)))
-        );
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 120, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed

@@ -4,12 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import tech.calaverita.bd.Conexion;
 import tech.calaverita.dao.ILibroDao;
 import tech.calaverita.models.Libro;
-import tech.calaverita.views.Autores;
 import tech.calaverita.views.Libros;
 
 public class LibroDaoJdbc implements ILibroDao {
@@ -20,6 +17,7 @@ public class LibroDaoJdbc implements ILibroDao {
     private static final String SQL_INSERT = "INSERT INTO libros(titulo, editorial, area, cover_url, digital_url, disponible_fisico) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE libros SET titulo = ?, editorial = ?, area = ?, cover_url = ?, digital_url = ?, disponible_fisico = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM libros WHERE id = ?";
+    private static final String SQL_SEARCH = "SELECT * FROM libros WHERE id = ? OR titulo =  ?";
 
     @Override
     public void seleccionar(Libros libros) throws SQLException {
@@ -51,6 +49,10 @@ public class LibroDaoJdbc implements ILibroDao {
                 new String[]{
                     "Id", "Titulo", "Editorial", "Area", "Url de Cover", "Url de Digital", "Disponible en Físico"
                 }));
+        Conexion.close(stmt);
+        if (this.conexionTransaccional == null) {
+            Conexion.close(conn);
+        }
     }
 
 //    @Override
@@ -154,6 +156,41 @@ public class LibroDaoJdbc implements ILibroDao {
             }
         }
         return registros;
+    }
+
+    @Override
+    public void buscar(String valor, Libros libros) throws SQLException {
+        Connection conn = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(SQL_SEARCH);
+        stmt.setString(1, valor);
+        stmt.setString(2, valor);
+
+        ResultSet counter = stmt.executeQuery();
+
+        int count = 0;
+        while (counter.next()) {
+            count++;
+        }
+
+        String list[][] = new String[count][7];
+        int i = 0;
+        ResultSet re = stmt.executeQuery();
+        while (re.next()) {
+            list[i][0] = re.getString("id");
+            list[i][1] = re.getString("titulo");
+            list[i][2] = re.getString("editorial");
+            list[i][3] = re.getString("area");
+            list[i][4] = re.getString("cover_url");
+            list[i][5] = re.getString("digital_url");
+            list[i][6] = re.getString("disponible_fisico");
+            i++;
+        }
+
+        libros.getTable().setModel(new javax.swing.table.DefaultTableModel(
+                list,
+                new String[]{
+                    "Id", "Titulo", "Editorial", "Area", "Url de Cover", "Url de Digital", "Disponible en Físico"
+                }));
     }
 
 }

@@ -49,7 +49,7 @@ public class Prestamos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        Valor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -61,11 +61,11 @@ public class Prestamos extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingrese el nombre o id del prestamo a buscar");
-        jTextField1.setBorder(null);
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        Valor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Valor.setForeground(new java.awt.Color(204, 204, 204));
+        Valor.setText("Ingrese el nombre o id del prestamo a buscar");
+        Valor.setBorder(null);
+        add(Valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 102, 255));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 460, 10));
@@ -74,6 +74,11 @@ public class Prestamos extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Buscar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -114,12 +119,22 @@ public class Prestamos extends javax.swing.JPanel {
         Eliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Eliminar.setForeground(new java.awt.Color(255, 255, 255));
         Eliminar.setText("Eliminar");
+        Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                EliminarMousePressed(evt);
+            }
+        });
         add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, -1, -1));
 
         Modificar.setBackground(new java.awt.Color(51, 102, 255));
         Modificar.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         Modificar.setForeground(new java.awt.Color(255, 255, 255));
         Modificar.setText("Modificar");
+        Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ModificarMousePressed(evt);
+            }
+        });
         add(Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -130,14 +145,38 @@ public class Prestamos extends javax.swing.JPanel {
         this.controller.setCabecera("Registrar Prestamo");
     }//GEN-LAST:event_RegistrarMousePressed
 
+    private void EliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMousePressed
+        // TODO add your handling code here:
+        EliminarRegistro vista = new EliminarRegistro("prestamo");
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Eliminar Prestamo");
+    }//GEN-LAST:event_EliminarMousePressed
+
+    private void ModificarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMousePressed
+        // TODO add your handling code here:
+        ModificarPrestamo vista = new ModificarPrestamo();
+        this.controller.setVista(vista);
+        this.controller.setCabecera("Modiciar Préstamo");
+    }//GEN-LAST:event_ModificarMousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        // TODO add your handling code here:
+        var valor = this.Valor.getText().toString();
+        try {
+            prestamo.buscar(valor, this);
+        } catch (SQLException ex) {
+            Logger.getLogger(Autores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1MousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton Registrar;
+    private javax.swing.JTextField Valor;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,12 @@
  */
 package tech.calaverita.views;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tech.calaverita.idao.PrestamoDaoJdbc;
+import tech.calaverita.models.Prestamo;
+
 /**
  *
  * @author memoc
@@ -13,8 +19,13 @@ public class Devolucion extends javax.swing.JPanel {
     /**
      * Creates new form Devolucion
      */
+    PrestamoDaoJdbc prestamoDaoJdbc;
+    Prestamo prestamo;
+
     public Devolucion() {
         initComponents();
+        prestamoDaoJdbc = new PrestamoDaoJdbc();
+        this.Devuelto.setVisible(false);
     }
 
     /**
@@ -29,13 +40,14 @@ public class Devolucion extends javax.swing.JPanel {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jLabel5 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
+        libroId = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        Devolver = new javax.swing.JButton();
+        usuarioId = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        Devuelto = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -49,26 +61,31 @@ public class Devolucion extends javax.swing.JPanel {
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 10, 270));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingrese el id del libro");
-        jTextField1.setBorder(null);
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        libroId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        libroId.setForeground(new java.awt.Color(204, 204, 204));
+        libroId.setText("Ingrese el id del libro");
+        libroId.setBorder(null);
+        add(libroId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 102, 255));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 180, 10));
 
-        jButton1.setBackground(new java.awt.Color(51, 102, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Devolver");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 180, 60));
+        Devolver.setBackground(new java.awt.Color(51, 102, 255));
+        Devolver.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
+        Devolver.setForeground(new java.awt.Color(255, 255, 255));
+        Devolver.setText("Devuelto");
+        Devolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                DevolverMousePressed(evt);
+            }
+        });
+        add(Devolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 180, 60));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Ingrese el id del usuario");
-        jTextField2.setBorder(null);
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        usuarioId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        usuarioId.setForeground(new java.awt.Color(204, 204, 204));
+        usuarioId.setText("Ingrese el id del usuario");
+        usuarioId.setBorder(null);
+        add(usuarioId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(51, 102, 255));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 180, 10));
@@ -80,11 +97,30 @@ public class Devolucion extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel3.setText("Libro");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        Devuelto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Devuelto.setText("¡La devolución se ha registrado con éxito!");
+        add(Devuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DevolverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DevolverMousePressed
+        // TODO add your handling code here:
+        try {
+            int usuarioId = Integer.parseInt(this.usuarioId.getText());
+            int libroId = Integer.parseInt(this.libroId.getText());
+
+            prestamo = new Prestamo(usuarioId, libroId);
+            prestamoDaoJdbc.devolver(prestamo);
+            Devuelto.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Devolucion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DevolverMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Devolver;
+    private javax.swing.JLabel Devuelto;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -92,7 +128,7 @@ public class Devolucion extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField libroId;
+    private javax.swing.JTextField usuarioId;
     // End of variables declaration//GEN-END:variables
 }

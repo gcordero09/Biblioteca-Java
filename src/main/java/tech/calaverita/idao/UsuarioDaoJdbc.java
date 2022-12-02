@@ -17,6 +17,7 @@ public class UsuarioDaoJdbc implements IUsuarioDao {
     private static final String SQL_INSERT = "INSERT INTO usuarios(nombre, programa, fecha_nacimiento, correo, password) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE usuarios SET nombre = ?, programa = ?, fecha_nacimiento = ?, correo = ?, password = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM usuarios WHERE id = ?";
+    private static final String SQL_SEARCH = "SELECT * FROM usuario WHERE id = ? OR nombre = ?";
 
     @Override
     public void seleccionar(Usuarios usuarios) throws SQLException {
@@ -47,8 +48,12 @@ public class UsuarioDaoJdbc implements IUsuarioDao {
                 new String[]{
                     "Id", "Nombre", "Programa", "Fecha de Nacimiento", "Correo", "Password"
                 }));
+        Conexion.close(stmt);
+        if (this.conexionTransaccional == null) {
+            Conexion.close(conn);
+        }
     }
-    
+
 //    @Override
 //    public List<Usuario> seleccionar() throws SQLException {
 //        Connection conn = null;
@@ -81,7 +86,6 @@ public class UsuarioDaoJdbc implements IUsuarioDao {
 //        }
 //        return usuarios;
 //    }
-
     @Override
     public int insertar(Usuario usuario) throws SQLException {
         Connection conn = null;
@@ -141,6 +145,39 @@ public class UsuarioDaoJdbc implements IUsuarioDao {
             }
         }
         return registros;
+    }
+
+    @Override
+    public void buscar(String valor, Usuarios usuarios) throws SQLException {
+        Connection conn = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(SQL_SEARCH);
+        stmt.setString(1, valor);
+        stmt.setString(2, valor);
+        ResultSet counter = stmt.executeQuery();
+
+        int count = 0;
+        while (counter.next()) {
+            count++;
+        }
+
+        String list[][] = new String[count][6];
+        int i = 0;
+        ResultSet re = stmt.executeQuery();
+        while (re.next()) {
+            list[i][0] = re.getString("id");
+            list[i][1] = re.getString("nombre");
+            list[i][2] = re.getString("programa");
+            list[i][3] = re.getString("fecha_nacimiento");
+            list[i][4] = re.getString("correo");
+            list[i][5] = re.getString("password");
+            i++;
+        }
+
+        usuarios.getTable().setModel(new javax.swing.table.DefaultTableModel(
+                list,
+                new String[]{
+                    "Id", "Nombre", "Programa", "Fecha de Nacimiento", "Correo", "Password"
+                }));
     }
 
 }

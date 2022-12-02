@@ -20,6 +20,7 @@ public class AutorDaoJdbc implements IAutorDao {
     private static final String SQL_INSERT = "INSERT INTO autores(nombre, nacionalidad) VALUES (?, ?)";
     private static final String SQL_UPDATE = "UPDATE autores SET nombre = ?, nacionalidad = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM autores WHERE id = ?";
+    private static final String SQL_SEARCH = "SELECT * FROM autores WHERE id = ? OR nombre = ?";
 
     public AutorDaoJdbc() {
 
@@ -55,6 +56,10 @@ public class AutorDaoJdbc implements IAutorDao {
                 new String[]{
                     "Id", "Nombre", "Nacionalidad"
                 }));
+        Conexion.close(stmt);
+        if (this.conexionTransaccional == null) {
+            Conexion.close(conn);
+        }
     }
 
 //    @Override
@@ -148,4 +153,38 @@ public class AutorDaoJdbc implements IAutorDao {
         }
         return registros;
     }
+
+    @Override
+    public void buscar(String valor, Autores autores) throws SQLException {
+        Connection conn = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(SQL_SEARCH);
+
+        stmt.setString(1, valor);
+        stmt.setString(2, valor);
+
+        ResultSet counter = stmt.executeQuery();
+
+        int count = 0;
+        while (counter.next()) {
+            count++;
+        }
+
+        String list[][] = new String[count][3];
+        int i = 0;
+        ResultSet re = stmt.executeQuery();
+        while (re.next()) {
+            list[i][0] = re.getString("id");
+            list[i][1] = re.getString("nombre");
+            list[i][2] = re.getString("nacionalidad");
+            i++;
+        }
+
+        autores.getTable().setModel(new javax.swing.table.DefaultTableModel(
+                list,
+                new String[]{
+                    "Id", "Nombre", "Nacionalidad"
+                }));
+
+    }
+
 }

@@ -15,4 +15,6 @@ public interface IUsuarioDao {
     public int eliminar(Usuario usuario) throws SQLException;
 
     public int actualizar(Usuario usuario) throws SQLException;
+    
+    public void buscar(String valor, Usuarios usuarios) throws SQLException;
 }
